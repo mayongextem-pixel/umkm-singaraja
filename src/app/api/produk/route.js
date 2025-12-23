@@ -1,12 +1,13 @@
 import { NextResponse } from "next/server";
-import { db } from "@/lib/db";
+// import { db } from "/lib/db";
+import { db } from "../../../lib/db";
 import { writeFile } from "fs/promises";
 import path from "path";
 
 export async function POST(request) {
   try {
     const formData = await request.formData();
-    
+
     // Ambil data sesuai nama field di form pendaftaran
     const nama_produk = formData.get("nama_produk");
     const harga = formData.get("harga");
@@ -31,15 +32,15 @@ export async function POST(request) {
       INSERT INTO umkms (nama_produk, harga, kategori, deskripsi, whatsapp, alamat, foto_produk, skala_usaha, created_at, updated_at) 
       VALUES (?, ?, ?, ?, ?, ?, ?, ?, NOW(), NOW())
     `;
-    
+
     const values = [
-      nama_produk, 
-      harga, 
-      kategori, 
-      deskripsi, 
-      whatsapp, 
-      alamat, 
-      fileName, 
+      nama_produk,
+      harga,
+      kategori,
+      deskripsi,
+      whatsapp,
+      alamat,
+      fileName,
       skala_usaha
     ];
 
