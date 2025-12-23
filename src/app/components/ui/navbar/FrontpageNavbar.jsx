@@ -32,7 +32,7 @@ export default function FrontpageNavbar() {
     // Peningkatan z-index ke 999 untuk memastikan navbar selalu di depan
     <nav className="fixed top-0 w-full z-[999] bg-[#0a0f1a]/95 backdrop-blur-md border-b border-gray-900 font-sans">
       <div className="max-w-screen-xl flex items-center justify-between mx-auto p-4">
-        
+
         {/* LOGO */}
         <Link href="/" className="flex items-center gap-2 group shrink-0">
           <span className="text-xl font-black text-white uppercase italic tracking-tighter">
@@ -42,12 +42,12 @@ export default function FrontpageNavbar() {
 
         {/* MENU UTAMA - TETAP UTUH */}
         <div className="hidden md:flex items-center space-x-8 text-[11px] font-black uppercase tracking-[0.2em] text-gray-400">
-          <Link href="/" className="hover:text-white transition-colors">Beranda</Link>
-          <Link href="/katalog" className="hover:text-white transition-colors">Katalog UMKM</Link>
-          
+          <Link href="/" className="hover:text-white transition-colors">BERANDA</Link>
+          <Link href="/katalog" className="hover:text-white transition-colors">KATALOG UMKM</Link>
+
           {/* Kategori Usaha Dropdown */}
-          <div className="group relative cursor-pointer flex items-center gap-1 hover:text-white transition-colors py-2">
-            Kategori Usaha <FaChevronDown className="text-[8px]" />
+          <div className="group relative cursor-pointer flex items-center gap-1 hover:text-white transition-colors py-2 uppercase">
+            KATEGORI USAHA <FaChevronDown className="text-[8px]" />
             <div className="absolute top-full left-0 hidden group-hover:block bg-[#0f172a] border border-gray-800 p-2 w-48 rounded-xl shadow-2xl text-white">
               <Link href="/katalog?jenis=Kuliner" className="block px-4 py-3 hover:bg-blue-600 rounded-lg text-[10px]">KULINER</Link>
               <Link href="/katalog?jenis=Fashion" className="block px-4 py-3 hover:bg-blue-600 rounded-lg text-[10px]">FASHION</Link>
@@ -57,8 +57,8 @@ export default function FrontpageNavbar() {
           </div>
 
           {/* Jenis UMKM Dropdown */}
-          <div className="group relative cursor-pointer flex items-center gap-1 hover:text-white transition-colors py-2">
-            Jenis UMKM <FaChevronDown className="text-[8px]" />
+          <div className="group relative cursor-pointer flex items-center gap-1 hover:text-white transition-colors py-2 uppercase">
+            JENIS UMKM <FaChevronDown className="text-[8px]" />
             <div className="absolute top-full left-0 hidden group-hover:block bg-[#0f172a] border border-gray-800 p-2 w-48 rounded-xl shadow-2xl text-white">
               <Link href="/katalog?skala=Mikro" className="block px-4 py-3 hover:bg-blue-600 rounded-lg text-[10px]">USAHA MIKRO</Link>
               <Link href="/katalog?skala=Kecil" className="block px-4 py-3 hover:bg-blue-600 rounded-lg text-[10px]">USAHA KECIL</Link>
@@ -66,7 +66,7 @@ export default function FrontpageNavbar() {
             </div>
           </div>
 
-          <Link href="/daftar-umkm" className="hover:text-white transition-colors">Daftar UMKM</Link>
+          <Link href="/daftar-umkm" className="hover:text-white transition-colors">DAFTAR UMKM</Link>
         </div>
 
         {/* AREA AUTH - PERBAIKAN CLICKABILITY */}
@@ -79,11 +79,11 @@ export default function FrontpageNavbar() {
                 </p>
                 <p className="text-white text-[10px] font-bold uppercase truncate max-w-[100px]">{user?.name}</p>
               </div>
-              
+
               {/* TOMBOL ADMIN - Penambahan properti hover & scale agar interaktif */}
               {user?.role === 'admin' && (
-                <Link 
-                  href="/admin/dashboard" 
+                <Link
+                  href="/admin/dashboard"
                   className="bg-blue-600 text-white p-2.5 rounded-xl hover:bg-blue-700 transition-all shadow-lg hover:scale-110 active:scale-95 flex items-center justify-center relative z-[1010]"
                 >
                   <FaUserShield size={14} />
@@ -91,8 +91,8 @@ export default function FrontpageNavbar() {
               )}
 
               {/* TOMBOL LOGOUT */}
-              <button 
-                onClick={handleLogout} 
+              <button
+                onClick={handleLogout}
                 className="p-2.5 bg-gray-800 text-gray-400 border border-gray-700 rounded-xl hover:text-red-500 hover:bg-red-500/10 transition-all cursor-pointer hover:scale-110 active:scale-95 flex items-center justify-center relative z-[1010]"
               >
                 <FaSignOutAlt size={14} />

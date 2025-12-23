@@ -2,9 +2,10 @@
 
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import FrontpageLayout from "../components/layouts/FrontpageLayout"; 
+import FrontpageLayout from "../components/layouts/FrontpageLayout";
 import { FaStore, FaImage, FaSpinner, FaWhatsapp, FaMapMarkerAlt, FaInfoCircle, FaMoneyBillWave } from "react-icons/fa";
 import toast from "react-hot-toast";
+import { getApiUrl } from "@/config/api";
 
 export default function DaftarUmkmPage() {
   const router = useRouter();
@@ -47,33 +48,35 @@ export default function DaftarUmkmPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!isLoggedIn) return toast.error("Silahkan login terlebih dahulu");
-    
+
     setLoading(true);
     const token = localStorage.getItem("token");
     const dataToSend = new FormData();
-    
+
     Object.keys(formData).forEach(key => dataToSend.append(key, formData[key]));
     if (foto) dataToSend.append("foto_produk", foto);
 
     try {
       // Pastikan endpoint mengarah ke controller yang benar
-      const res = await fetch("http://127.0.0.1:8000/api/produk", {
+      const res = await fetch(getApiUrl("/produk"), {
         method: "POST",
         headers: { "Authorization": `Bearer ${token}` },
         body: dataToSend,
       });
 
       if (res.ok) {
-        toast.success("Berhasil mendaftar UMKM!");
-        router.push("/katalog");
-      } else { 
+        toast.success("Berhasil mendaftar UMKM! Menunggu persetujuan admin.");
+        setTimeout(() => {
+          router.push("/umkm/dashboard");
+        }, 1500);
+      } else {
         const errData = await res.json();
-        toast.error(errData.message || "Gagal mendaftar."); 
+        toast.error(errData.message || "Gagal mendaftar.");
       }
-    } catch (err) { 
-      toast.error("Koneksi ke server gagal."); 
-    } finally { 
-      setLoading(false); 
+    } catch (err) {
+      toast.error("Koneksi ke server gagal.");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -85,14 +88,14 @@ export default function DaftarUmkmPage() {
         </h1>
 
         <form onSubmit={handleSubmit} className="bg-[#0a0a0a] border border-gray-900 p-8 rounded-[2.5rem] shadow-2xl space-y-8 relative overflow-hidden">
-          
+
           {/* Overlay Login jika belum masuk */}
           {!isLoggedIn && (
             <div className="absolute inset-0 z-50 flex flex-col items-center justify-center bg-black/90 backdrop-blur-md rounded-[2.5rem] p-6 text-center">
               <p className="text-white font-bold mb-6 uppercase text-xs tracking-widest">Anda harus login terlebih dahulu untuk mendaftar UMKM.</p>
-              <button 
-                type="button" 
-                onClick={() => router.push('/auth/login')} 
+              <button
+                type="button"
+                onClick={() => router.push('/auth/login')}
                 className="bg-red-600 text-white px-10 py-4 rounded-2xl font-black text-[10px] uppercase tracking-widest hover:bg-red-700 transition-all"
               >
                 LOGIN UNTUK MENDAFTAR
