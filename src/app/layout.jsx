@@ -20,17 +20,13 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }) {
+  // MODIFIKASI 3: Ganti bahasa ke 'id'
   return (
-    <html lang="id"> {/* MODIFIKASI 3: Ganti bahasa ke 'id' */}
-      <head>
-        {/* Tambahkan link ke Font Awesome jika Anda menggunakan ikon <i> di footer */}
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-..." crossOrigin="anonymous" referrerPolicy="no-referrer" />
-      </head>
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+    <html lang="id"><head>
+      {/* Tambahkan link ke Font Awesome jika Anda menggunakan ikon <i> di footer */}
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-..." crossOrigin="anonymous" referrerPolicy="no-referrer" />
+    </head><body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         {children}
-      </body>
-    </html>
+      </body></html>
   );
 }
